@@ -1,0 +1,33 @@
+name: CI/CD Pipeline
+
+on:
+ push:
+    branches: [main]
+    
+jobs:
+    build-and-push:
+        runs-on: self-hosted
+
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v4
+
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v3
+              with:
+                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                aws-region: us-east-1
+
+            - name: Log in to ECR
+              id: login-ecr
+              uses: aws-actions/amazon-ecr-login@v2
+
+            - name: Build Docker image
+              run: |
+               docker build -t devops-pipeline .
+               docker tag devops-pipeline:latest 891376933619.dkr.ecr.us-east-1.amazonaws.com/devops-pipeline:latest
+
+            - name: Push to ECR
+              run: |
+               docker push 891376933619.dkr.ecr.us-east-1.amazonaws.com/devops-pipeline:latest
