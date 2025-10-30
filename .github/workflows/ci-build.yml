@@ -17,12 +17,12 @@ jobs:
 
       - name: Terraform Init (no-backend)
         run: terraform init -backend=false
-        working-directory: ./terraform
+        working-directory: .
 
       - name: Terraform Fmt check
-        run: terraform fmt -check
-        working-directory: ./terraform
+        run: terraform fmt -check -recursive
+        working-directory: .
 
       - name: Terraform Validate
         run: terraform validate
-        working-directory: ./terraform
+        working-directory: .

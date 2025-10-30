@@ -17,10 +17,10 @@ jobs:
         uses: hashicorp/setup-terraform@v2
       - name: Terraform Init
         run: terraform init -backend=false
-        working-directory: ./terraform
+        working-directory: .
       - name: Terraform Plan
         run: terraform plan -no-color
-        working-directory: ./terraform
+        working-directory: .
 
   apply:
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
@@ -32,7 +32,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
       - name: Terraform Init
         run: terraform init
-        working-directory: ./terraform
+        working-directory: .
       - name: Terraform Apply
         run: terraform apply -auto-approve
-        working-directory: ./terraform
+        working-directory: .
