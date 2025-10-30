@@ -1,9 +1,7 @@
-output "region" {
-  description = "AWS region in use"
-  value       = var.region
+output "repository_url" {
+  value = module.ecr.repository_url
 }
 
-output "environment" {
-  description = "Deployment environment"
-  value       = var.env
+output "ecs_cluster_name" {
+  value = module.ecs.cluster_name
 }

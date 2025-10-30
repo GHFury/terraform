@@ -1,37 +1,16 @@
-variable "ecr_name" {
-  type = string
-}
-
-variable "env" {
-  type = string
-}
-
-variable "region" {
-  type = string
-}
-
 module "ecr" {
-  source = "../../modules/ecr"
-  name   = var.ecr_name
-  tags = {
-    Environment = var.env
-  }
+  source        = "../../modules/ecr"
+  project_name  = var.project_name
 }
 
 module "iam" {
-  source = "../../modules/iam"
-  name   = "${var.env}-task-role"
+  source        = "../../modules/iam"
+  project_name  = var.project_name
 }
 
 module "ecs" {
-  source = "../../modules/ecs"
-  name   = "${var.env}-cluster"
-}
-
-output "ecr_repository_url" {
-  value = module.ecr.repository_url
-}
-
-output "ecs_cluster_arn" {
-  value = module.ecs.cluster_arn
+  source                     = "../../modules/ecs"
+  project_name               = var.project_name
+  ecr_repo_url               = module.ecr.repository_url
+  ecs_task_execution_role_arn = module.iam.ecs_task_execution_role_arn
 }

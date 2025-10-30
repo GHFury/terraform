@@ -1,3 +1,2 @@
-ecr_name = "pipeline-dev-ecr"
-env      = "dev"
-region   = "us-east-1"
+aws_region   = "us-east-1"
+project_name = "devops-pipeline"

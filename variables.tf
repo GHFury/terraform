@@ -1,11 +1,11 @@
-variable "region" {
-  description = "AWS region for resources"
+variable "aws_region" {
+  description = "AWS region"
   type        = string
   default     = "us-east-1"
 }
 
-variable "env" {
-  description = "Deployment environment"
+variable "project_name" {
+  description = "Project name"
   type        = string
-  default     = "dev"
+  default     = "devops-pipeline"
 }
