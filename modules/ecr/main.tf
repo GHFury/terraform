@@ -4,7 +4,9 @@ resource "aws_ecr_repository" "repo" {
   image_scanning_configuration {
     scan_on_push = true
   }
+}
 
+}
 
 resource "aws_ecr_lifecycle_policy" "repo_policy" {
   repository = aws_ecr_repository.repo.name
@@ -24,6 +26,5 @@ resource "aws_ecr_lifecycle_policy" "repo_policy" {
       }
     ]
   })
-}
 }
 
